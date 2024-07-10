@@ -58,7 +58,7 @@ class Game
     
     public int PlayGame()
     {
-        roundCount = 0
+        roundCount = 0;
         do 
         {
             roundCount++;		
