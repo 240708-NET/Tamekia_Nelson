@@ -1,11 +1,15 @@
 class Program
 {
+	// Fields 
+	// Methods	
 	static void Main( string[] args )
 	{
 		Console.WriteLine( "High/Low Running" );
-
+		// singleton - you create a single instance of something that is referenced throughout the application to complete some functionality
+		// create an instance of the Game class
+		Game newGame = new Game();
+		int roundCount = newGame.PlayGame();
 	// in SDLC a user story is a way to track a feature
-
 
 	// computer should choose a randon number 
 	// user should be able to make guesses
@@ -15,14 +19,14 @@ class Program
 	// user can guess until they guess the correct number 
 	
 		// Variables
-		int targetNumber;
-		int guessNumber;
-		int roundCount = 0;
-		string guessString;
+		// int targetNumber;
+		// int guessNumber;/
+		// int roundCount = 0;
+		// string guessString;
 
-		// creating a random number
-		Random rand = new Random();
-		targetNumber = rand.Next(11);
+		// // creating a random number
+		// Random rand = new Random();
+		// targetNumber = rand.Next(11);
 		
 		// for loop may not know when to stop
 		// foreach is right out, nothing to iterate
@@ -30,29 +34,29 @@ class Program
 		// do while will execute at lease once, will work better
 
 
-		do {
-			// roundCount = roundCount + 1;
-			// roundCount += 1;
-			roundCount++;		
+		// do {
+		// 	// roundCount = roundCount + 1;
+		// 	// roundCount += 1;
+		// 	roundCount++;		
 	
-			Console.Write( "Enter a guess between 0 - 10: " );
-			guessString = Console.ReadLine();
+		// 	Console.Write( "Enter a guess between 0 - 10: " );
+		// 	guessString = Console.ReadLine();
 
-			guessNumber = Int32.Parse( guessString );
+		// 	guessNumber = Int32.Parse( guessString );
 		
-			if(guessNumber == targetNumber) 
-			{
-				Console.WriteLine( " Greate Job!!! " );
-			}
-			else if(guessNumber > targetNumber)
-			{
-				Console.WriteLine( " Your number is too high!!! ");
-			}
-			else
-			{
-				Console.WriteLine( "Oops, too low!!!" );
-			}
-		} while ( guessNumber != targetNumber );
+		// 	if(guessNumber == targetNumber) 
+		// 	{
+		// 		Console.WriteLine( " Greate Job!!! " );
+		// 	}
+		// 	else if(guessNumber > targetNumber)
+		// 	{
+		// 		Console.WriteLine( " Your number is too high!!! ");
+		// 	}
+		// 	else
+		// 	{
+		// 		Console.WriteLine( "Oops, too low!!!" );
+		// 	}
+		// } while ( guessNumber != targetNumber );
 		Console.WriteLine( "Thank you for playing!!" );
 		Console.WriteLine( $"Rounds to guess, {roundCount}" );
 	}
