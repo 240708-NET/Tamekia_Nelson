@@ -25,10 +25,10 @@ namespace TodoListConsoleApp
                 switch(selection)
                 {
                     case 1:
-                        AddTasks.Run();
+                        AddTask.Run();
                         break;
                     case 2:
-                        VIEWTASK_LIST.Run();
+                        ViewTaskList.Run();
                         break;
                     case 3:
                         Environment.Exit(0);

@@ -4,7 +4,7 @@
 
 namespace TodoListConsoleApp
 {
-    public class AddTasks
+    public class AddTask
     {
         public static void Run()
         {
@@ -17,7 +17,7 @@ namespace TodoListConsoleApp
             }
             else
             {
-                todo.AddTasks(newTask);
+                todo.AddTask(newTask);
             }
         }
     }

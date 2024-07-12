@@ -3,12 +3,12 @@
 
 namespace TodoListConsoleApp
 {
-    public class VIEWTASK_LIST
+    public class ViewTaskList
     {
         public static void Run()
         {
             TodoList todo = TodoList.GetInstance();
-            todo.VIEWTASK_LIST();
+            todo.ViewTaskList();
         }
     }
 }
