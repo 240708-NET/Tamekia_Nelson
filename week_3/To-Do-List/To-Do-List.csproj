@@ -6,7 +6,7 @@
     <RootNamespace>To_Do_List</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <UserSecretsId>fe4371e4-9cbc-4253-98be-93d1020a3811</UserSecretsId>
+ 
   </PropertyGroup>
 
   <ItemGroup>

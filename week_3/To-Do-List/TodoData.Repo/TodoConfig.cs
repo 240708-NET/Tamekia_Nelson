@@ -12,7 +12,6 @@ namespace TodoData.Repos
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
-                // .AddUserSecrets<TodoContextFactory>() 
                 .Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<TodoContext>();
