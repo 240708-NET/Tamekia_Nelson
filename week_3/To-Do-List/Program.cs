@@ -13,8 +13,11 @@ namespace TodoListConsoleApp
             {
                 Console.WriteLine("Press #1 and press 'Enter' to add a new task: ");
                 Console.WriteLine("Press #2 and press 'Enter' to view task list");
-                Console.WriteLine("Press #3 and press 'Enter' to exit to-do application");
-                
+                Console.WriteLine("Press #3 and press 'Enter' to edit task");
+                Console.WriteLine("Press #4 and press 'Enter' to delete task");
+                Console.WriteLine("Press #5 and press 'Enter' to exit to-do application");
+
+
                 int selection;
                 bool isValid = int.TryParse(Console.ReadLine(), out selection);
                 if (!isValid)
@@ -31,6 +34,12 @@ namespace TodoListConsoleApp
                         ViewTaskList.Run();
                         break;
                     case 3:
+                        EditTask.Run();
+                        break;
+                    case 4:
+                        DeleteTask.Run();
+                        break;
+                    case 5:
                         Environment.Exit(0);
                         break;
                 }

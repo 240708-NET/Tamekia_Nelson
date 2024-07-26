@@ -23,6 +23,26 @@ namespace TodoListConsoleApp
             tasks.Add(task);
             Console.WriteLine("The to-do application is now tracking your new task!");
         }
+        public IReadOnlyList<string> Tasks => tasks; 
+        public void EditTask(int index, string newTask)
+        {
+            if(index >= 0 && index < tasks.Count)
+            {
+                tasks[index] = newTask;
+            }
+        }
+        public void DeleteTask(int index)
+        {
+            if (index >= 0 && index < tasks.Count)
+            {
+                tasks.RemoveAt(index);
+                Console.WriteLine("Task deleted successfully!");
+            }
+            else
+            {
+                Console.WriteLine("Invalid entry. Please enter a valid ID");
+            }
+        }
         public void ViewTaskList() // Public method to view tasks
         {
             if(tasks.Count == 0)
