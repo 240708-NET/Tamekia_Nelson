@@ -1,41 +1,54 @@
-// singleton of the todo list application. 
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+using TodoData.Models;
 
 namespace TodoListConsoleApp
 {
     public class TodoList
     {
-        private static TodoList instance = null!; // Private field to hold the single instance of the TodoList
-        private List<string>tasks; // Private list to store task  
-        private TodoList() // private constructor to prevent instantiation from outside of class
+        private static TodoList instance = null!; 
+        private List<Todo> tasks; 
+
+        private TodoList() 
         {
-            tasks = new List<string>();
+            tasks = new List<Todo>();
         }
-        public static TodoList GetInstance() // Public method to allow access to singelton 
+
+        public static TodoList GetInstance() 
         {    
             if (instance == null)
-                {
-                    instance = new TodoList();
-                }
-                return instance;
+            {
+                instance = new TodoList();
             }
-        public void AddTask(string task) // Public method to add tasks
+            return instance;
+        }
+
+        public void AddTask(string task)
         {
-            tasks.Add(task);
+            int newId = tasks.Count > 0 ? tasks[^1].ID + 1 : 1; 
+            int newTaskNumber = tasks.Count + 1; 
+            tasks.Add(new Todo { ID = newId, TodoTask = task, TaskNumber = newTaskNumber, IsComplete = false });
             Console.WriteLine("The to-do application is now tracking your new task!");
         }
-        public IReadOnlyList<string> Tasks => tasks; 
-        public void EditTask(int index, string newTask)
+
+        public IReadOnlyList<Todo> Tasks => tasks; 
+
+        public void EditTask(int id, string newTask) 
         {
-            if(index >= 0 && index < tasks.Count)
+            Todo? task = tasks.Find(t => t.ID == id); 
+            if (task != null)
             {
-                tasks[index] = newTask;
+                task.TodoTask = newTask;
             }
         }
-        public void DeleteTask(int index)
+
+        public void DeleteTask(int id) 
         {
-            if (index >= 0 && index < tasks.Count)
+            Todo? task = tasks.Find(t => t.ID == id); 
+            if (task != null)
             {
-                tasks.RemoveAt(index);
+                tasks.Remove(task);
                 Console.WriteLine("Task deleted successfully!");
             }
             else
@@ -43,18 +56,31 @@ namespace TodoListConsoleApp
                 Console.WriteLine("Invalid entry. Please enter a valid ID");
             }
         }
-        public void ViewTaskList() // Public method to view tasks
+
+        public string SerializeTasks() 
         {
-            if(tasks.Count == 0)
+            return JsonSerializer.Serialize(tasks); 
+        }
+
+        public void DisplayJsonData() 
+        {
+            string json = SerializeTasks(); 
+            Console.WriteLine("Current task list data:");
+            Console.WriteLine(json);
+        }
+
+        public void ViewTaskList() 
+        {
+            if (tasks.Count == 0)
             {
-                Console.WriteLine("The list is currently empty. Please select appropriate selection to add a new task or exit application. ");
+                Console.WriteLine("The list is currently empty. Please select appropriate selection to add a new task or exit application.");
             }
-            else 
+            else
             {
-                Console.WriteLine("Current list of tasks: ");
-                for (int i = 0; i < tasks.Count; i++)
+                Console.WriteLine("Current list of tasks:");
+                foreach (var task in tasks)
                 {
-                    Console.WriteLine($"{i +1}.{tasks[i]}");
+                    Console.WriteLine($"{task.ID}. {task.TodoTask}");
                 }
             }
         }

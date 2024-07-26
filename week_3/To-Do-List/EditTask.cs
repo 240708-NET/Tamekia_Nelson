@@ -1,3 +1,6 @@
+using System;
+using TodoData.Models;
+
 namespace TodoListConsoleApp
 {
     public class EditTask
@@ -5,36 +8,30 @@ namespace TodoListConsoleApp
         public static void Run()
         {
             TodoList todo = TodoList.GetInstance();
-            
-            if (todo.Tasks.Count == 0)
+            Console.WriteLine("Enter the ID of the task you want to edit: "); 
+            if (!int.TryParse(Console.ReadLine(), out int id))
             {
-                Console.WriteLine("No tasks available to edit.");
+                Console.WriteLine("Invalid ID. Please enter a valid ID.");
                 return;
             }
 
-            Console.WriteLine("Current list of tasks by ID:");
-            for (int i = 0; i < todo.Tasks.Count; i++)
+            Todo? task = todo.Tasks.FirstOrDefault(t => t.ID == id); 
+            if (task == null)
             {
-                Console.WriteLine($"{i}. {todo.Tasks[i]}");
-            }
-
-            Console.WriteLine("Enter the task ID you want to edit: ");
-            if (!int.TryParse(Console.ReadLine(), out int index) || index < 0 || index >= todo.Tasks.Count)
-            {
-                Console.WriteLine("Invalid. Please enter a valid ID.");
+                Console.WriteLine("Task not found. Please enter a valid ID.");
                 return;
             }
 
-            Console.WriteLine($"Current task: {todo.Tasks[index]}");
+            Console.WriteLine($"Current task: {task.TodoTask}");
             Console.WriteLine("Enter the new task description: ");
-            string newTask = Console.ReadLine();
-            if (string.IsNullOrWhiteSpace(newTask))
+            string newDescription = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(newDescription))
             {
                 Console.WriteLine("Please enter a valid task. Task cannot be empty!!");
                 return;
             }
 
-            todo.EditTask(index, newTask);
+            todo.EditTask(id, newDescription); 
             Console.WriteLine("Task edited successfully!");
         }
     }
